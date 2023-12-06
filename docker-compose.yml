@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: app
+    build: ./docker/app
+    privileged: true
+    ports:
+      - "80:80"
+    volumes:
+      - ./laravel:/var/www
+      - ./shared/nginx/logs:/var/log/nginx
+      - ./shared/php/logs:/var/log/php-fpm
+    environment:
+      - XDEBUG_SESSION=PHPStorm
+      - PHP_IDE_CONFIG=serverName=slackapi-sample
+    command: /bin/sh -c "php-fpm && nginx -g 'daemon off;'"
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: mysql
+    build: ./docker/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_DATABASE=slackapi
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+    volumes:
+      - ./shared/mysql/data:/var/lib/mysql
+      - ./shared/mysql/logs:/var/log/mysql
+
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog:latest
+    ports:
+      - "8025:8025"
+      - "1025:1025"
