@@ -14,7 +14,12 @@ services:
     environment:
       - XDEBUG_SESSION=PHPStorm
       - PHP_IDE_CONFIG=serverName=slackapi-sample
-    command: /bin/sh -c "php-fpm && nginx -g 'daemon off;'"
+    command: >
+      /bin/sh -c "
+      chmod 777 -Rf /var/www/storage &&
+      php-fpm &&
+      nginx -g 'daemon off;'
+      "
     depends_on:
       - mysql
 
