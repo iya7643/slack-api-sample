@@ -7,6 +7,7 @@ services:
     privileged: true
     ports:
       - "80:80"
+      - "5173:5173"
     volumes:
       - ./laravel:/var/www
       - ./shared/nginx/logs:/var/log/nginx
@@ -16,6 +17,7 @@ services:
       - PHP_IDE_CONFIG=serverName=slackapi-sample
     command: >
       /bin/sh -c "
+      mkdir -p /var/www/storage/framework/{cache,sessions,views} &&
       chmod 777 -Rf /var/www/storage &&
       php-fpm &&
       nginx -g 'daemon off;'

@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('messages', function (Blueprint $table) {
+            $table->id();
+            $table->string('type');
+            $table->text('text');
+            $table->boolean('upload')->default(false);
+            $table->string('user');
+            $table->boolean('display_as_bot')->default(false);
+            $table->decimal('ts', 20, 6);
+            $table->json('blocks');
+            $table->json('edited');
+            $table->string('client_msg_id');
+            $table->decimal('thread_ts', 20, 6);
+            $table->json('reply_users');
+            $table->boolean('is_locked')->default(false);
+            $table->boolean('subscribed')->default(false);
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('messages');
+    }
+};

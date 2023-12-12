@@ -6,11 +6,19 @@
 
     <title>@yield('title')</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-<section class="section">
+
+@include('___header')
+
+<section class="section top">
     <div class="container">
         @yield('content')
     </div>
 </section>
+
+@include('___footer')
+
+</body>
+</html>

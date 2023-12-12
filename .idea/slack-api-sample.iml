@@ -117,7 +117,6 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/theseer/tokenizer" />
-      <excludeFolder url="file://$MODULE_DIR$/laravel/node_modules" />
     </content>
     <content url="file://$MODULE_DIR$/laravel/node_modules" />
     <orderEntry type="inheritedJdk" />

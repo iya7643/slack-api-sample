@@ -1,32 +1,20 @@
-@extends('___layout')
+@extends('___app')
 @section('title', 'index')
 
 @section('content')
     <h1 class="title">
-        Hello World
+        Slackチャンネル一覧
     </h1>
-    <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-    </p>
-
-    <div>
-        <button class="button is-primary">
-            Button
-        </button>
-        <button class="button is-link">
-            Button
-        </button>
-        <button class="button is-info">
-            Button
-        </button>
-        <button class="button is-success">
-            Button
-        </button>
-        <button class="button is-warning">
-            Button
-        </button>
-        <button class="button is-danger">
-            Button
-        </button>
+    <div class="columns is-multiline">
+        @foreach($channels as $channel)
+            <div class="column is-one-third">
+                <div class="box" style="min-height: 12rem;">
+                    <p class="title is-4">
+                        <a href="{{ $channel->id }}">{{ $channel->name }}</a>
+                    </p>
+                    <p>{{ $channel->purpose['value'] }}</p>
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection

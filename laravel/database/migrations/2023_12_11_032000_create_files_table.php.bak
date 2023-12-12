@@ -1,0 +1,66 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('attachments', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('message_id')->constrained()->onDelete('cascade');
+            $table->integer('created');
+            $table->integer('timestamp');
+            $table->string('name');
+            $table->string('title');
+            $table->string('mimetype');
+            $table->string('filetype');
+            $table->string('pretty_type');
+            $table->string('user');
+            $table->string('user_team');
+            $table->boolean('editable')->default(false);
+            $table->integer('size');
+            $table->string('mode');
+            $table->boolean('is_external')->default(false);
+            $table->string('external_type');
+            $table->boolean('is_public')->default(false);
+            $table->boolean('public_url_shared')->default(false);
+            $table->boolean('display_as_bot')->default(false);
+            $table->string('username');
+            $table->string('url_private');
+            $table->string('url_private_download');
+            $table->string('media_display_type');
+            $table->string('thumb_64');
+            $table->string('thumb_80');
+            $table->string('thumb_360');
+            $table->integer('thumb_360_w');
+            $table->integer('thumb_360_h');
+            $table->string('thumb_480');
+            $table->integer('thumb_480_w');
+            $table->integer('thumb_480_h');
+            $table->string('thumb_160');
+            $table->string('thumb_720');
+            $table->integer('thumb_720_w');
+            $table->integer('thumb_720_h');
+            $table->integer('original_w');
+            $table->integer('original_h');
+            $table->string('thumb_tiny');
+            $table->string('permalink');
+            $table->string('permalink_public');
+            $table->boolean('is_starred')->default(false);
+            $table->boolean('has_rich_preview')->default(false);
+            $table->string('file_access');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('attachments');
+    }
+};

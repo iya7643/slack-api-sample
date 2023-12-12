@@ -2,37 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Exception\GuzzleException;
+use App\Services\ChannelService;
+use App\Services\MemberService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Services\SlackApiService;
-use JsonException;
 
 class HomeController extends Controller
 {
     public function __construct(
-        protected SlackApiService $slack_api_service
+        protected ChannelService $channel_service,
+        protected MemberService $member_service,
     ) {}
 
     /**
      * @param Request $request
      * @return View
      */
-    public function welcome(Request $request): View
-    {
-        return view('welcome');
-    }
-
-    /**
-     * @param Request $request
-     * @return View
-     * @throws GuzzleException
-     * @throws JsonException
-     */
     public function index(Request $request): View
     {
-        $this->slack_api_service->conversationsList();
+        $channels = $this->channel_service->list();
 
-        return view('index');
+        return view('index', compact('channels'));
     }
 }
